@@ -1,0 +1,26 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: nodejsapp
+  region: us-west-1
+vpc:
+    subnets:
+        private:
+            us-west-1b: {id: subnet-002483d03f507e715}
+            us-west-1a: {id: subnet-0469963e826bdea95}
+        public:
+            us-west-1a: {id: subnet-0373eb470a0fd6ac9}
+            us-west-1b: {id: subnet-0ebc95c18e945b936}
+        
+managedNodeGroups:
+- name: nodegroup
+  desiredCapacity: 2
+  minSize: 1
+  maxSize: 6
+  instanceTypes: ["t3a.medium","t3.medium"]
+  ssh:
+    enableSsm: true
+  spot: true
+  maxPodsPerNode: 100
+  privateNetworking: true
