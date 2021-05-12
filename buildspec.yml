@@ -6,7 +6,7 @@ phases:
         commands:
         # apt-get upgrade install -y
         # curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
-        - echo Installing kubectl...
+        - echo Installing kubectl tool...
         - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
         - chmod +x /usr/local/bin/kubectl
         # chmod +x ./kubectl ./aws-iam-authenticator
