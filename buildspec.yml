@@ -10,7 +10,7 @@ phases:
         - chmod +x ./kubectl ./aws-iam-authenticator
         - export PATH=$PWD/:$PATH
         - kubectl version
-    pre_buid:
+    pre_build:
         commands:
         - echo Logging in to Amazon ECR...
         - aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 555516925462.dkr.ecr.us-west-1.amazonaws.com
@@ -24,7 +24,7 @@ phases:
         - echo Building the Docker image...
         - docker build -t $REPOSITORY_URI:latest .
         - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG   
-    post_buid:
+    post_build:
         commands:
         - echo Pushing the Docker images...
         - docker push $REPOSITORY_URI:latest
