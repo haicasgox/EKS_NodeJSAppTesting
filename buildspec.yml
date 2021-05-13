@@ -40,8 +40,8 @@ phases:
         - echo Writing image definitions file...
         - printf '[{"name":"cicd-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG
         - echo Push the latest image to cluster...
-        - kubectl apply -f service.yml
         - kubectl apply -f deployment.yml
+        - kubectl apply -f service.yml
 artifacts:
     files:
         - '**/*'
