@@ -11,7 +11,7 @@ phases:
         - chmod +x /usr/local/bin/kubectl
         # chmod +x ./kubectl ./aws-iam-authenticator
         #- export PATH=$PWD/:$PATH
-        - kubectl version
+        #- kubectl version
     pre_build:
         commands:
         - echo Logging in to Amazon ECR...
