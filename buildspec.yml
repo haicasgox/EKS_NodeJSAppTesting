@@ -18,7 +18,7 @@ phases:
         - aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 555516925462.dkr.ecr.us-west-1.amazonaws.com
         - REPOSITORY_URI=555516925462.dkr.ecr.us-west-1.amazonaws.com/nodejsapp
         - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-        - export KUBECONFIG=$HOME/.kube/config
+        # export KUBECONFIG=$HOME/.kube/config
         - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
     build:
         commands:
