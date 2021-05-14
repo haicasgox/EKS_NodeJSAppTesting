@@ -3,8 +3,8 @@
 	        "version": "1.0.0",
 		    "description": "Node.js on Docker",
 		        "author": "Abdullah Alaslan",
-			    "main": "hello-world.js",
+			    "main": "simpleapp.js",
 			        "scripts": {
-					      "start": "node hello-world.js"
+					      "start": "node simpleapp.js"
 					          }
 						    }
