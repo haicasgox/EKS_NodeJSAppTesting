@@ -1,0 +1,24 @@
+variable "dynamodb_table" {
+  description = "DynamoDB table name to store lock object for terraform operation"
+}
+
+variable "dynamodb_read_capacity" {
+  description = "The read_capacity value for the DynamoDB table to store lock object"
+  default     = 5
+}
+
+variable "dynamodb_write_capacity" {
+  description = "The write_capacity value for the DynamoDB table to store lock object"
+  default     = 5
+}
+
+variable "bucket_name" {
+  
+}
+variable "acl" {
+  default = "private"
+}
+
+variable "aws_account_id" {
+  description = "The aws account id for the tf backend creation (e.g. 857026751867)"
+}
