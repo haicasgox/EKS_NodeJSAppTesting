@@ -4,27 +4,16 @@ phases:
         runtime-versions:
             nodejs: 12
         commands:
-        # apt-get upgrade install -y
-        # curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/aws-iam-authenticator
         - echo Installing kubectl tool...
         - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
         - chmod +x ./kubectl
         - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-        # chmod +x ./kubectl ./aws-iam-authenticator
-        #- export PATH=$PWD/:$PATH
-        #- kubectl version
-        #- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        #- unzip awscliv2.zip
-        #- sudo ./aws/install
-        #- ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
-        #- aws --version
     pre_build:
         commands:
         - echo Logging in to Amazon ECR...
         - aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 555516925462.dkr.ecr.us-west-1.amazonaws.com
         - REPOSITORY_URI=555516925462.dkr.ecr.us-west-1.amazonaws.com/nodejsapp
         - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-        # export KUBECONFIG=$HOME/.kube/config
         - echo Logging in to Amazon EKS...
         - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $AWS_CLUSTER_NAME
     build:
@@ -39,7 +28,7 @@ phases:
         - docker push $REPOSITORY_URI:latest
         - echo Writing image definitions file...
         - printf '[{"name":"cicd-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG
-        - echo Push the latest image to cluster...
+        - echo deploy the latest image on EKS cluster...
         - kubectl apply -f deployment.yml
         - kubectl apply -f service.yml
 artifacts:
